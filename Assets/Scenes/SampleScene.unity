@@ -193,6 +193,7 @@ GameObject:
   - component: {fileID: 290175865}
   - component: {fileID: 290175864}
   - component: {fileID: 290175866}
+  - component: {fileID: 290175867}
   m_Layer: 0
   m_Name: Pig (1)
   m_TagString: Pig
@@ -309,6 +310,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &290175867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290175862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2e9e3227e7239e4083cf4151bb8203f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 20
+  chunkPrefab: {fileID: 0}
+  explodeForce: 200
+  explodeMaxDamage: 10
 --- !u!1 &304651363
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,7 +487,7 @@ GameObject:
   - component: {fileID: 666742047}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -575,6 +592,7 @@ GameObject:
   - component: {fileID: 749683623}
   - component: {fileID: 749683622}
   - component: {fileID: 749683624}
+  - component: {fileID: 749683625}
   m_Layer: 0
   m_Name: Pig (2)
   m_TagString: Pig
@@ -691,6 +709,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &749683625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749683620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2e9e3227e7239e4083cf4151bb8203f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 20
+  chunkPrefab: {fileID: 0}
+  explodeForce: 200
+  explodeMaxDamage: 10
 --- !u!1 &905231117
 GameObject:
   m_ObjectHideFlags: 0
@@ -832,10 +866,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2e9e3227e7239e4083cf4151bb8203f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 5
+  hp: 20
   chunkPrefab: {fileID: 4462930074741336127, guid: 788e44d4db14d6643ad30e74122dd1f9,
     type: 3}
   explodeForce: 100
+  explodeMaxDamage: 10
 --- !u!1 &972518902
 GameObject:
   m_ObjectHideFlags: 0
@@ -848,6 +883,7 @@ GameObject:
   - component: {fileID: 972518905}
   - component: {fileID: 972518904}
   - component: {fileID: 972518906}
+  - component: {fileID: 972518907}
   m_Layer: 0
   m_Name: Pig
   m_TagString: Pig
@@ -964,6 +1000,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &972518907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972518902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2e9e3227e7239e4083cf4151bb8203f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 20
+  chunkPrefab: {fileID: 0}
+  explodeForce: 200
+  explodeMaxDamage: 10
 --- !u!1 &983590239
 GameObject:
   m_ObjectHideFlags: 0
@@ -1105,10 +1157,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2e9e3227e7239e4083cf4151bb8203f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 5
+  hp: 20
   chunkPrefab: {fileID: 4462930074741336127, guid: 788e44d4db14d6643ad30e74122dd1f9,
     type: 3}
   explodeForce: 100
+  explodeMaxDamage: 10
 --- !u!1 &997542844
 GameObject:
   m_ObjectHideFlags: 0
@@ -1250,10 +1303,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2e9e3227e7239e4083cf4151bb8203f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 5
+  hp: 20
   chunkPrefab: {fileID: 4462930074741336127, guid: 788e44d4db14d6643ad30e74122dd1f9,
     type: 3}
   explodeForce: 100
+  explodeMaxDamage: 10
 --- !u!1 &1154380257
 GameObject:
   m_ObjectHideFlags: 0
@@ -1436,10 +1490,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2e9e3227e7239e4083cf4151bb8203f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 5
+  hp: 20
   chunkPrefab: {fileID: 4462930074741336127, guid: 788e44d4db14d6643ad30e74122dd1f9,
     type: 3}
   explodeForce: 100
+  explodeMaxDamage: 10
 --- !u!1 &1279105159
 GameObject:
   m_ObjectHideFlags: 0
@@ -1581,10 +1636,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2e9e3227e7239e4083cf4151bb8203f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 5
+  hp: 20
   chunkPrefab: {fileID: 4462930074741336127, guid: 788e44d4db14d6643ad30e74122dd1f9,
     type: 3}
   explodeForce: 100
+  explodeMaxDamage: 10
 --- !u!1 &1834449288
 GameObject:
   m_ObjectHideFlags: 0
@@ -1726,10 +1782,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2e9e3227e7239e4083cf4151bb8203f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 5
+  hp: 20
   chunkPrefab: {fileID: 4462930074741336127, guid: 788e44d4db14d6643ad30e74122dd1f9,
     type: 3}
   explodeForce: 100
+  explodeMaxDamage: 10
 --- !u!1 &1920040044
 GameObject:
   m_ObjectHideFlags: 0
@@ -1871,10 +1928,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2e9e3227e7239e4083cf4151bb8203f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 5
+  hp: 20
   chunkPrefab: {fileID: 4462930074741336127, guid: 788e44d4db14d6643ad30e74122dd1f9,
     type: 3}
   explodeForce: 100
+  explodeMaxDamage: 10
 --- !u!1 &1929291884
 GameObject:
   m_ObjectHideFlags: 0
@@ -2016,10 +2074,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2e9e3227e7239e4083cf4151bb8203f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 5
+  hp: 20
   chunkPrefab: {fileID: 4462930074741336127, guid: 788e44d4db14d6643ad30e74122dd1f9,
     type: 3}
   explodeForce: 100
+  explodeMaxDamage: 10
 --- !u!1001 &5146716645442496434
 PrefabInstance:
   m_ObjectHideFlags: 0
