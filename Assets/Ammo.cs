@@ -10,12 +10,20 @@ public class Ammo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        rb.AddForce(new Vector2(0, -lift));
+        if(rb)
+        {
+            rb.AddForce(new Vector2(0, lift*rb.mass));
+        }
+    }
+
+    public void Shoot()
+    {
+        rb = GetComponent<Rigidbody2D>();
     }
 }

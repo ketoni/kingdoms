@@ -5,6 +5,7 @@ using UnityEngine;
 public class Cannon : MonoBehaviour
 {
     [SerializeField] GameObject ammoPrefab;
+    [SerializeField] float power = 200;
 
     private float maxDistance;
     private bool dragging;
@@ -13,6 +14,7 @@ public class Cannon : MonoBehaviour
     private float maxSize = 10;
     private int scale;
     private GameObject ammo;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -50,7 +52,6 @@ public class Cannon : MonoBehaviour
         scale = (int) distance;
         scale = Mathf.Max(1, scale);
         Vector2 size = new Vector2(scale, scale);
-        
         ammo.transform.localScale = size;
         
     }
@@ -68,7 +69,8 @@ public class Cannon : MonoBehaviour
         ammo.AddComponent<Rigidbody2D>();
         Rigidbody2D rb = ammo.GetComponent<Rigidbody2D>();
         rb.mass = scale;
-        Vector2 force = direction * rb.mass * 300;
+        Vector2 force = direction * rb.mass * power;
         rb.AddForce(force);
+        ammo.GetComponent<Ammo>().Shoot();
     }
 }
