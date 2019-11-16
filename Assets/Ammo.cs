@@ -43,7 +43,7 @@ public class Ammo : MonoBehaviour
             destroyCalled = true;
             Invoke("Disappear", destroyDelay);
         }
-        if(collision.collider.tag == "Breakable")
+        if(collision.collider.tag == "Breakable" || collision.collider.tag == "Pig")
         {
             collision.collider.GetComponent<Breakable>().GetHit(rb.mass * hitSpeed);
         }

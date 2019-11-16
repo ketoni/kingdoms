@@ -8,6 +8,7 @@ public class Breakable : MonoBehaviour
     [SerializeField] GameObject chunkPrefab;
     [SerializeField] float explodeForce = 200;
     [SerializeField] float explodeMaxDamage = 10;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,10 +20,9 @@ public class Breakable : MonoBehaviour
     {
         if (hp <= 0)
         {
-            //CreateChunks()
-            Explode();
-            Destroy(gameObject);
+            Die();
         }
+        //Check if out of screen and die
     }
     public void GetHit(float force)
     {
@@ -65,6 +65,19 @@ public class Breakable : MonoBehaviour
         body.AddForce(dir.normalized * explosionForce * wearoff);
         float dmg = ((explosionForce * wearoff)/explosionForce) * explodeMaxDamage;
         body.GetComponent<Breakable>().GetHit(dmg);
+    }
+
+    private void Die()
+    {
+        //CreateChunks()
+        Explode();
+        if (tag == "Pig") FindObjectOfType<GameController>().PigDied();
+        Destroy(gameObject);
+    }
+
+    private void OnBecameInvisible()
+    {
+        Die();
     }
 
     //public void AddExplosionForce(this Rigidbody2D body, float explosionForce, Vector3 explosionPosition, float explosionRadius, float upliftModifier)
