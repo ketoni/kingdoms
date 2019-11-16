@@ -57,6 +57,10 @@ public class Cannon : MonoBehaviour
 
         Vector2 size = new Vector2(scale, scale);
         ammo.transform.localScale = size;
+        float angle = Vector2.Angle( new Vector2(2.0f, 0.0f) , pressPos - currentPos);
+        print(angle);
+
+        GameObject.Find("Barrel").transform.eulerAngles = new Vector3(0f, 0f, angle);
         
     }
 
