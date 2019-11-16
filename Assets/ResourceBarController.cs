@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ResourceBarController : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class ResourceBarController : MonoBehaviour
     public int currentMana = 10;
     public GameObject manaPrefab;
     public GameObject manaGlowPrefab;
-    public GameObject manaBarObject;
+    //public GameObject manaBarObject;
     private Canvas overlayCanvas;
     private GameObject manaBar;
 
@@ -17,35 +18,43 @@ public class ResourceBarController : MonoBehaviour
     void Start()
     {
         overlayCanvas = FindObjectOfType<Canvas>();
-        manaBar = Instantiate(manaBarObject);
+        manaBar = gameObject;
         //float dist = manaBar.transform.localScale.y / maxMana;
+        RectTransform dims = manaBar.GetComponent<RectTransform>();
+        float dist = dims.sizeDelta.y / maxMana;
 
         for (int i = 0; i < maxMana; i++)
         {
-            var temp = Instantiate(manaPrefab, new Vector3(0.0f, 0.8f * i, 0.0f), Quaternion.identity);
+            var temp = Instantiate(manaPrefab, manaBar.transform.position + new Vector3(0.0f, dist * i, 0.0f), Quaternion.identity);
+            temp.GetComponent<RectTransform>().sizeDelta = new Vector2(dist, dist);
             temp.transform.SetParent(manaBar.transform);
             temp.name = "Mana" + i;
             temp.SetActive(false);
         }
         
-
-        manaBar.transform.position = new Vector3(12.0f, -2.0f, 0.0f);
-        manaBar.transform.SetParent(overlayCanvas.transform);
     }
 
     public bool DrawManaUsage(int amount)
     {
         for (int i = 0; i < maxMana; i++)
         {
-            manaBar.transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255);
+            manaBar.transform.GetChild(i).gameObject.GetComponent<Image>().color = new Color(255, 255, 255);
         }
 
         for (int i = currentMana-amount; i < currentMana; i++)
         {
-            manaBar.transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0);
+            manaBar.transform.GetChild(i).gameObject.GetComponent<Image>().color = new Color(255, 0, 0);
         }
         return false;
         
+    }
+
+    public void ClearManaUsage()
+    {
+        for (int i = 0; i < maxMana; i++)
+        {
+            manaBar.transform.GetChild(i).gameObject.GetComponent<Image>().color = new Color(255, 255, 255);
+        }
     }
 
     public bool UseMana(int amount)
@@ -53,6 +62,7 @@ public class ResourceBarController : MonoBehaviour
         if (amount <= currentMana)
         {
             currentMana -= amount;
+            ClearManaUsage();
             DrawMana();
             return true;
         }
