@@ -49,7 +49,6 @@ public class Cannon : MonoBehaviour
         float distance = Vector2.Distance(pressPos, currentPos);
         
         distance = Mathf.Min((distance/maxDistance) * 10, maxSize);
-        Debug.Log("distance "+ distance + " "+ maxSize);
         scale = (int) distance;
         scale = Mathf.Max(1, scale);
         var resourceBar = FindObjectOfType<ResourceBarController>();
