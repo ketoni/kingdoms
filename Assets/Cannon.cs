@@ -117,6 +117,7 @@ public class Cannon : NetworkBehaviour
         rb.mass = bulletScale;
         Vector2 force = bulletDirection * rb.mass * bulletPower;
         rb.AddForce(force);
+        rb.AddTorque((Random.value - 0.5f) * 50f);
         ammo.GetComponent<Ammo>().Shoot();
     }
 
