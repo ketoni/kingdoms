@@ -27,7 +27,7 @@ public class Breakable : MonoBehaviour
     }
     public void GetHit(float force)
     {
-       // Debug.Log("HIT: " + force);
+        //Debug.Log("HIT: " + force);
         hp -= force;
         if(!crack)
         {
@@ -36,7 +36,7 @@ public class Breakable : MonoBehaviour
             renderer.sprite = Resources.Load<Sprite>("crack");
             renderer.size = GetComponent<SpriteRenderer>().size;
             crack.transform.SetParent(transform);
-            crack.transform.localPosition = new Vector3(0,0,-1);
+            crack.transform.localPosition = new Vector3(0,0,100);
         }
         
     }
