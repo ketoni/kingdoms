@@ -39,6 +39,7 @@ public class Cannon : MonoBehaviour
         {
             dragging = false;
             Shoot(Input.mousePosition);
+            FindObjectOfType<ResourceBarController>().UseMana(scale);
         }
     }
 
@@ -51,6 +52,10 @@ public class Cannon : MonoBehaviour
         Debug.Log("distance "+ distance + " "+ maxSize);
         scale = (int) distance;
         scale = Mathf.Max(1, scale);
+        var resourceBar = FindObjectOfType<ResourceBarController>();
+        scale = Mathf.Min(scale, resourceBar.AvailableMana());
+        resourceBar.DrawManaUsage(scale);
+
         Vector2 size = new Vector2(scale, scale);
         ammo.transform.localScale = size;
         

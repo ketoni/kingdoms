@@ -8,6 +8,7 @@ public class ResourceBarController : MonoBehaviour
     public int maxMana = 10;
     public int currentMana = 10;
     public GameObject manaPrefab;
+    public GameObject manaGlowPrefab;
     public GameObject manaBarObject;
     private Canvas overlayCanvas;
     private GameObject manaBar;
@@ -18,6 +19,7 @@ public class ResourceBarController : MonoBehaviour
         overlayCanvas = FindObjectOfType<Canvas>();
         manaBar = Instantiate(manaBarObject);
         //float dist = manaBar.transform.localScale.y / maxMana;
+
         for (int i = 0; i < maxMana; i++)
         {
             var temp = Instantiate(manaPrefab, new Vector3(0.0f, 0.8f * i, 0.0f), Quaternion.identity);
@@ -25,22 +27,25 @@ public class ResourceBarController : MonoBehaviour
             temp.name = "Mana" + i;
             temp.SetActive(false);
         }
+        
+
+        manaBar.transform.position = new Vector3(12.0f, -2.0f, 0.0f);
         manaBar.transform.SetParent(overlayCanvas.transform);
     }
 
     public bool DrawManaUsage(int amount)
     {
-        if (amount <= currentMana)
+        for (int i = 0; i < maxMana; i++)
         {
-
-            return true;
+            manaBar.transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255);
         }
-        else
+
+        for (int i = currentMana-amount; i < currentMana; i++)
         {
-
-            return false;
+            manaBar.transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0);
         }
-        //Some cool graphics about mana about to be used
+        return false;
+        
     }
 
     public bool UseMana(int amount)
@@ -53,6 +58,11 @@ public class ResourceBarController : MonoBehaviour
         }
         else
             return false;
+    }
+
+    public int AvailableMana()
+    {
+        return currentMana;
     }
 
     public void RestoreMana(int amount)
