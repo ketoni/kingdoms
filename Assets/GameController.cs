@@ -9,6 +9,8 @@ public class GameController : MonoBehaviour
     [SerializeField] GameObject countDownPrefab;
     [SerializeField] GameObject endTextPrefab;
     [SerializeField] float resourceFillDelay = 0.5f;
+    [SerializeField] float cannonPower = 250f;
+    [SerializeField] float lift = 7f;
 
     private GameObject battleGround;
     private ResourceBarController rbController;
@@ -64,6 +66,15 @@ public class GameController : MonoBehaviour
         {
             EndGame();
         }
+    }
+
+    public float GetCannonPower()
+    {
+        return cannonPower;
+    }
+    public float GetLift()
+    {
+        return lift;
     }
 }
 

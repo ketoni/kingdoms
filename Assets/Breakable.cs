@@ -8,6 +8,7 @@ public class Breakable : MonoBehaviour
     [SerializeField] GameObject chunkPrefab;
     [SerializeField] float explodeForce = 200;
     [SerializeField] float explodeMaxDamage = 10;
+    private GameObject crack;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +29,16 @@ public class Breakable : MonoBehaviour
     {
        // Debug.Log("HIT: " + force);
         hp -= force;
+        if(!crack)
+        {
+            crack = Instantiate(new GameObject());
+            SpriteRenderer renderer = crack.AddComponent<SpriteRenderer>();
+            renderer.sprite = Resources.Load<Sprite>("crack");
+            renderer.size = GetComponent<SpriteRenderer>().size;
+            crack.transform.SetParent(transform);
+            crack.transform.localPosition = new Vector3(0,0,-1);
+        }
+        
     }
 
     private void CreateChunks()

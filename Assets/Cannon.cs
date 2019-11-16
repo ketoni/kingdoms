@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 public class Cannon : NetworkBehaviour
 {
     [SerializeField] GameObject ammoPrefab;
-    [SerializeField] float power = 200;
+    private float power = 200;
 
     private float maxDistance;
     private bool dragging;
@@ -23,6 +23,7 @@ public class Cannon : NetworkBehaviour
         resolution = Screen.currentResolution;
         maxDistance = resolution.width / 4;
         controller = FindObjectOfType<GameController>();
+        power = controller.GetCannonPower();
     }
 
     // Update is called once per frame
@@ -66,10 +67,11 @@ public class Cannon : NetworkBehaviour
 
         Vector2 size = new Vector2(scale, scale);
         ammo.transform.localScale = size;
-        float angle = Vector2.Angle(new Vector2(2.0f, 0.0f), pressPos - currentPos);
-        print(angle);
 
-        transform.GetChild(0).eulerAngles = new Vector3(0f, 0f, angle);
+        float x = pressPos.x - currentPos.x;
+        float y = pressPos.y - currentPos.y;
+        float angle = Mathf.Atan2(y, x) * Mathf.Rad2Deg;
+        transform.GetChild(0).rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
         CmdUpdateSize(size);
     }

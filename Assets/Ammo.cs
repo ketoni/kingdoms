@@ -13,7 +13,7 @@ public class Ammo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+       lift = FindObjectOfType<GameController>().GetLift();
     }
 
     // Update is called once per frame
