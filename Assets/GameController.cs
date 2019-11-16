@@ -12,16 +12,20 @@ public class GameController : MonoBehaviour
 
     private GameObject battleGround;
     private ResourceBarController rbController;
+    private GameObject manaBar;
     public bool matchStarted = false;
 
     private void Start()
     {
         rbController = FindObjectOfType<ResourceBarController>();
+        manaBar = FindObjectOfType<ResourceBarController>().gameObject;
+        manaBar.SetActive(false);
     }
 
     public void StartGame()
     {
         mainMenu.SetActive(false);
+        manaBar.SetActive(true);
         Instantiate(battleGroundPrefab);
         Instantiate(countDownPrefab, FindObjectOfType<Canvas>().transform);
     }
