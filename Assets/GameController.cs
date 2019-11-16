@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour
     [SerializeField] float resourceFillDelay = 0.5f;
     [SerializeField] float cannonPower = 250f;
     [SerializeField] float lift = 7f;
+    [SerializeField] float explodeForce = 40;
 
     private GameObject battleGround;
     private ResourceBarController rbController;
@@ -75,6 +76,10 @@ public class GameController : MonoBehaviour
     public float GetLift()
     {
         return lift;
+    }
+    public float GetExplodeForce()
+    {
+        return explodeForce;
     }
 }
 

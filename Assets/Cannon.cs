@@ -115,7 +115,7 @@ public class Cannon : NetworkBehaviour
         //shoot
         ammo.AddComponent<Rigidbody2D>();
         Rigidbody2D rb = ammo.GetComponent<Rigidbody2D>();
-        rb.mass = bulletScale;
+        rb.mass = bulletScale*0.1f;
         Vector2 force = bulletDirection * rb.mass * bulletPower;
         rb.AddForce(force);
         ammo.GetComponent<Ammo>().Shoot();
