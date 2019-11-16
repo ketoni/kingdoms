@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Cannon : MonoBehaviour
+public class Cannon : NetworkBehaviour
 {
     [SerializeField] GameObject ammoPrefab;
     [SerializeField] float power = 200;
@@ -25,7 +26,11 @@ public class Cannon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(dragging)
+        if (!isLocalPlayer) // allow only ourselves to shoot
+        {
+            return;
+        }
+        if (dragging)
         {
             UpdateSize(Input.mousePosition);
         }
@@ -33,7 +38,7 @@ public class Cannon : MonoBehaviour
         {
             dragging = true;
             pressPos = Input.mousePosition;
-            SpawnAmmo();
+            CmdSpawnAmmo();
         }
         if(Input.GetMouseButtonUp(0))
         {
@@ -44,33 +49,62 @@ public class Cannon : MonoBehaviour
 
     private void UpdateSize(Vector2 currentPos)
     {
-        
         float distance = Vector2.Distance(pressPos, currentPos);
-        
-        distance = Mathf.Min((distance/maxDistance) * 10, maxSize);
-        Debug.Log("distance "+ distance + " "+ maxSize);
-        scale = (int) distance;
+
+        distance = Mathf.Min((distance / maxDistance) * 10, maxSize);
+        Debug.Log("distance " + distance + " " + maxSize);
+        scale = (int)distance;
         scale = Mathf.Max(1, scale);
         Vector2 size = new Vector2(scale, scale);
-        ammo.transform.localScale = size;
-        
+        CmdUpdateSize(size);
     }
-
-    private void SpawnAmmo()
-    {
-        ammo = Instantiate(ammoPrefab, transform);
-    }
-
     private void Shoot(Vector2 releasePos)
     {
         Vector2 direction = pressPos - releasePos;
         direction = direction.normalized;
+        CmdShoot(direction, scale, power);
+    }
+
+    [Command]
+    private void CmdSpawnAmmo()
+    {
+        RpcSpawnAmmo();
+    }
+
+
+    [Command]
+    private void CmdShoot(Vector2 bulletDirection, int bulletScale, float bulletPower)
+    {
+        RpcShoot(bulletDirection, bulletScale, bulletPower);
+    }
+
+    [Command]
+    private void CmdUpdateSize(Vector2 size)
+    {
+        RpcUpdateSize(size);
+    }
+
+    [ClientRpc]
+    private void RpcSpawnAmmo()
+    {
+        ammo = Instantiate(ammoPrefab, transform);
+    }
+
+    [ClientRpc]
+    private void RpcShoot(Vector2 bulletDirection, int bulletScale, float bulletPower)
+    {
         //shoot
         ammo.AddComponent<Rigidbody2D>();
         Rigidbody2D rb = ammo.GetComponent<Rigidbody2D>();
-        rb.mass = scale;
-        Vector2 force = direction * rb.mass * power;
+        rb.mass = bulletScale;
+        Vector2 force = bulletDirection * rb.mass * bulletPower;
         rb.AddForce(force);
         ammo.GetComponent<Ammo>().Shoot();
+    }
+
+    [ClientRpc]
+    private void RpcUpdateSize(Vector2 size)
+    {
+        ammo.transform.localScale = size;
     }
 }
