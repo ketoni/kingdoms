@@ -10,44 +10,65 @@ public class Cannon : MonoBehaviour
     private bool dragging;
     private Vector2 pressPos;
     private Resolution resolution;
+    private float maxSize = 10;
+    private int scale;
+    private GameObject ammo;
     // Start is called before the first frame update
     void Start()
     {
         resolution = Screen.currentResolution;
-        maxDistance = resolution.width / 2;
+        maxDistance = resolution.width / 4;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(dragging)
+        {
+            UpdateSize(Input.mousePosition);
+        }
         if(Input.GetMouseButtonDown(0))
         {
             dragging = true;
             pressPos = Input.mousePosition;
+            SpawnAmmo();
         }
         if(Input.GetMouseButtonUp(0))
         {
             dragging = false;
             Shoot(Input.mousePosition);
         }
-
-    
     }
+
+    private void UpdateSize(Vector2 currentPos)
+    {
+        
+        float distance = Vector2.Distance(pressPos, currentPos);
+        
+        distance = Mathf.Min((distance/maxDistance) * 10, maxSize);
+        Debug.Log("distance "+ distance + " "+ maxSize);
+        scale = (int) distance;
+        scale = Mathf.Max(1, scale);
+        Vector2 size = new Vector2(scale, scale);
+        
+        ammo.transform.localScale = size;
+        
+    }
+
+    private void SpawnAmmo()
+    {
+        ammo = Instantiate(ammoPrefab, transform);
+    }
+
     private void Shoot(Vector2 releasePos)
     {
         Vector2 direction = pressPos - releasePos;
         direction = direction.normalized;
-        float distance = Vector2.Distance(pressPos, releasePos);
-        GameObject ammo = Instantiate(ammoPrefab, transform);
-        //set size
-        float scale = Mathf.Max(distance, 1);
-        Vector2 size = new Vector2(scale, scale);
-        ammo.transform.localScale = size;
-        //set mass
+        //shoot
+        ammo.AddComponent<Rigidbody2D>();
         Rigidbody2D rb = ammo.GetComponent<Rigidbody2D>();
         rb.mass = scale;
-        //shoot
-        Vector2 force = direction * distance * rb.mass;
+        Vector2 force = direction * rb.mass * 300;
         rb.AddForce(force);
     }
 }
