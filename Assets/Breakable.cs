@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Breakable : MonoBehaviour
+public class Breakable : NetworkBehaviour
 {
     [SerializeField] float hp = 20;
     [SerializeField] GameObject chunkPrefab;
@@ -21,7 +22,7 @@ public class Breakable : MonoBehaviour
     {
         if (hp <= 0)
         {
-            Die();
+            CmdDie();
         }
         //Check if out of screen and die
     }
@@ -78,7 +79,14 @@ public class Breakable : MonoBehaviour
         body.GetComponent<Breakable>().GetHit(dmg);
     }
 
-    private void Die()
+    [Command]
+    private void CmdDie()
+    {
+        RpcDie();
+    }
+
+    [ClientRpc]
+    private void RpcDie()
     {
         //CreateChunks()
         Explode();
@@ -88,7 +96,7 @@ public class Breakable : MonoBehaviour
 
     private void OnBecameInvisible()
     {
-        Die();
+        CmdDie();
     }
 
     //public void AddExplosionForce(this Rigidbody2D body, float explosionForce, Vector3 explosionPosition, float explosionRadius, float upliftModifier)
