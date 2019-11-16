@@ -13,13 +13,14 @@ public class GameController : MonoBehaviour
     private GameObject battleGround;
     private ResourceBarController rbController;
     private GameObject manaBar;
-    public bool matchStarted = false;
+    public bool matchStarted = true;
 
     private void Start()
     {
         rbController = FindObjectOfType<ResourceBarController>();
         manaBar = FindObjectOfType<ResourceBarController>().gameObject;
-        manaBar.SetActive(false);
+        StartMatch();
+        //manaBar.SetActive(false);
     }
 
     public void StartGame()

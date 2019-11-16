@@ -332,12 +332,12 @@ MonoBehaviour:
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
   m_LogLevel: 3
-  m_PlayerPrefab: {fileID: 5146716644317496147, guid: 3421ec673dc9f9340bea7cd289ab19b7,
+  m_PlayerPrefab: {fileID: 5873671360754409051, guid: 05bb992087841db4aafb28f6cae98ccf,
     type: 3}
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 1
   m_OfflineScene: Lobby
-  m_OnlineScene: SampleScene
+  m_OnlineScene: KrisuScene
   m_SpawnPrefabs: []
   m_CustomConfig: 0
   m_MaxConnections: 4
