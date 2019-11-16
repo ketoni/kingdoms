@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8817568359560221507}
   - component: {fileID: 4485255562799558048}
-  - component: {fileID: 3912406292933492183}
   - component: {fileID: 114527087803959798}
   - component: {fileID: 114758276581636802}
   - component: {fileID: 114556501875219334}
+  - component: {fileID: 7821298849225507808}
   m_Layer: 0
   m_Name: CannonBall_orange
   m_TagString: Ammo
@@ -83,22 +83,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &3912406292933492183
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8817568359560221505}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.032
 --- !u!114 &114527087803959798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,3 +152,19 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!58 &7821298849225507808
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8817568359560221505}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.04955072
