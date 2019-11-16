@@ -15,35 +15,41 @@ public class Cannon : NetworkBehaviour
     private float maxSize = 10;
     private int scale;
     private GameObject ammo;
-    
+    private GameController controller;
+
     // Start is called before the first frame update
     void Start()
     {
         resolution = Screen.currentResolution;
         maxDistance = resolution.width / 4;
+        controller = FindObjectOfType<GameController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isLocalPlayer) // allow only ourselves to shoot
+        if (controller.matchStarted)
         {
-            return;
-        }
-        if (dragging)
-        {
-            UpdateSize(Input.mousePosition);
-        }
-        if(Input.GetMouseButtonDown(0))
-        {
-            dragging = true;
-            pressPos = Input.mousePosition;
-            CmdSpawnAmmo();
-        }
-        if(Input.GetMouseButtonUp(0))
-        {
-            dragging = false;
-            Shoot(Input.mousePosition);
+            if (!isLocalPlayer) // allow only ourselves to shoot
+            {
+                return;
+            }
+            if (dragging)
+            {
+                UpdateSize(Input.mousePosition);
+            }
+            if(Input.GetMouseButtonDown(0))
+            {
+                dragging = true;
+                pressPos = Input.mousePosition;
+                CmdSpawnAmmo();
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                dragging = false;
+                Shoot(Input.mousePosition);
+                FindObjectOfType<ResourceBarController>().UseMana(scale);
+            }
         }
     }
 
@@ -52,12 +58,22 @@ public class Cannon : NetworkBehaviour
         float distance = Vector2.Distance(pressPos, currentPos);
 
         distance = Mathf.Min((distance / maxDistance) * 10, maxSize);
-        Debug.Log("distance " + distance + " " + maxSize);
         scale = (int)distance;
         scale = Mathf.Max(1, scale);
+        var resourceBar = FindObjectOfType<ResourceBarController>();
+        scale = Mathf.Min(scale, resourceBar.AvailableMana());
+        resourceBar.DrawManaUsage(scale);
+
         Vector2 size = new Vector2(scale, scale);
+        ammo.transform.localScale = size;
+        float angle = Vector2.Angle(new Vector2(2.0f, 0.0f), pressPos - currentPos);
+        print(angle);
+
+        GameObject.Find("Barrel").transform.eulerAngles = new Vector3(0f, 0f, angle);
+
         CmdUpdateSize(size);
     }
+
     private void Shoot(Vector2 releasePos)
     {
         Vector2 direction = pressPos - releasePos;

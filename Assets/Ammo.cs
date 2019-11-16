@@ -6,6 +6,7 @@ public class Ammo : MonoBehaviour
 {
     [SerializeField] float lift = 0.01f;
     [SerializeField] float destroyDelay = 1f;
+    private float hitSpeed;
 
     private bool destroyCalled = false;
     private Rigidbody2D rb;
@@ -18,9 +19,11 @@ public class Ammo : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        
         if(rb)
         {
             rb.AddForce(new Vector2(0, lift*rb.mass));
+            hitSpeed = rb.velocity.magnitude;
         }
     }
 
@@ -40,9 +43,9 @@ public class Ammo : MonoBehaviour
             destroyCalled = true;
             Invoke("Disappear", destroyDelay);
         }
-        if(collision.collider.tag == "Breakable")
+        if(collision.collider.tag == "Breakable" || collision.collider.tag == "Pig")
         {
-            collision.collider.GetComponent<Breakable>().GetHit(rb.mass);
+            collision.collider.GetComponent<Breakable>().GetHit(rb.mass * hitSpeed);
         }
     }
 }
