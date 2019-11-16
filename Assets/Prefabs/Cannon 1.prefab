@@ -207,9 +207,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46be7ede5ecea2145bed4e1d71410d56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammoPrefab: {fileID: 8817568359560221505, guid: 2b4c1e26a0e1e8f47a2bf10be029050e,
+  ammoPrefab: {fileID: 8817568359560221505, guid: ed8fdaa8482966149835dde0b00110ae,
     type: 3}
-  power: 250
 --- !u!114 &114190168960173034
 MonoBehaviour:
   m_ObjectHideFlags: 0
