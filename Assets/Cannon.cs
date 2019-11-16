@@ -66,7 +66,6 @@ public class Cannon : NetworkBehaviour
         resourceBar.DrawManaUsage(scale);
 
         Vector2 size = new Vector2(scale, scale);
-        ammo.transform.localScale = size;
 
         float x = pressPos.x - currentPos.x;
         float y = pressPos.y - currentPos.y;
