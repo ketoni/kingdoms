@@ -14,42 +14,48 @@ public class Cannon : MonoBehaviour
     private float maxSize = 10;
     private int scale;
     private GameObject ammo;
-    
+    private GameController controller;
+
     // Start is called before the first frame update
     void Start()
     {
         resolution = Screen.currentResolution;
         maxDistance = resolution.width / 4;
+        controller = FindObjectOfType<GameController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(dragging)
+        if (controller.matchStarted)
         {
-            UpdateSize(Input.mousePosition);
-        }
-        if(Input.GetMouseButtonDown(0))
-        {
-            dragging = true;
-            pressPos = Input.mousePosition;
-            SpawnAmmo();
-        }
-        if(Input.GetMouseButtonUp(0))
-        {
-            dragging = false;
-            Shoot(Input.mousePosition);
-            FindObjectOfType<ResourceBarController>().UseMana(scale);
+
+            if (dragging)
+            {
+                UpdateSize(Input.mousePosition);
+            }
+            if (Input.GetMouseButtonDown(0))
+            {
+                dragging = true;
+                pressPos = Input.mousePosition;
+                SpawnAmmo();
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                dragging = false;
+                Shoot(Input.mousePosition);
+                FindObjectOfType<ResourceBarController>().UseMana(scale);
+            }
         }
     }
 
     private void UpdateSize(Vector2 currentPos)
     {
-        
+
         float distance = Vector2.Distance(pressPos, currentPos);
-        
-        distance = Mathf.Min((distance/maxDistance) * 10, maxSize);
-        scale = (int) distance;
+
+        distance = Mathf.Min((distance / maxDistance) * 10, maxSize);
+        scale = (int)distance;
         scale = Mathf.Max(1, scale);
         var resourceBar = FindObjectOfType<ResourceBarController>();
         scale = Mathf.Min(scale, resourceBar.AvailableMana());
