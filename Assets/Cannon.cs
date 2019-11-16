@@ -105,7 +105,8 @@ public class Cannon : NetworkBehaviour
     [ClientRpc]
     private void RpcSpawnAmmo()
     {
-        ammo = Instantiate(ammoPrefab, transform);
+        ammo = Instantiate(ammoPrefab);
+        ammo.transform.position = transform.position;
     }
 
     [ClientRpc]
