@@ -645,6 +645,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1508218671}
   - component: {fileID: 1508218670}
+  - component: {fileID: 1508218672}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -671,6 +672,7 @@ MonoBehaviour:
     type: 3}
   endTextPrefab: {fileID: 3386100604605125979, guid: d912d3a2fcac0a04da9cd0e664b0b787,
     type: 3}
+  resourceFillDelay: 0.5
   matchStarted: 0
 --- !u!4 &1508218671
 Transform:
@@ -686,6 +688,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1508218672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508218669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c610b92f43adf34da8ee928ca04e58c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxMana: 10
+  currentMana: 10
+  manaPrefab: {fileID: 8686081255931635356, guid: d5ab0f9feb16e4b499c5906fe4e6b2b3,
+    type: 3}
+  manaGlowPrefab: {fileID: 6212806732092664280, guid: 5371c3e8ee3341f428c8b5b54444220f,
+    type: 3}
+  manaBarObject: {fileID: 8618996634320959049, guid: 2de1106bac6f9a64ca1733f9808abdb1,
+    type: 3}
 --- !u!1 &1960478531
 GameObject:
   m_ObjectHideFlags: 0
