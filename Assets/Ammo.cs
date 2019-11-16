@@ -5,7 +5,9 @@ using UnityEngine;
 public class Ammo : MonoBehaviour
 {
     [SerializeField] float lift = 0.01f;
+    [SerializeField] float destroyDelay = 1f;
 
+    private bool destroyCalled = false;
     private Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
@@ -25,5 +27,18 @@ public class Ammo : MonoBehaviour
     public void Shoot()
     {
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Disappear()
+    {
+        Destroy(gameObject);
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag != "Ammo" && !destroyCalled)
+        {
+            destroyCalled = true;
+            Invoke("Disappear", destroyDelay);
+        }
     }
 }
